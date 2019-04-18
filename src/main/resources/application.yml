@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+## dubbo配置
+#dubbo:
+#  application:
+#    name: ityuan-consumer
+#  registry:
+#    address: zookeeper://127.0.0.1:2181
+#    protocol: zookeeper
+#  protocol:
+#    name: dubbo
+#    port: 20880
+
