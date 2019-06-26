@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
 
 import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -57,10 +57,13 @@ public class StreamPracticeImpl {
         Optional<Integer> t6 = transactions.stream().map(transaction -> transaction.getValue()).reduce(Integer::max);
         //找到交易额最小的交易
         Optional<Transaction> t7 = transactions.stream().min((o1, o2) -> o1.getValue() > o2.getValue() ? 1 : -1);
-
-        int sum = transactions.stream().mapToInt(t -> t.getValue()).sum();
-        System.out.println(sum);
-
+        //映射到数值流
+        OptionalInt sum = transactions.stream().mapToInt(Transaction::getValue).max();
+        //数值范围
+        IntStream.rangeClosed(0, 100).forEach(value -> value++);
+        //交易按照年度分组
+        Map<Integer, List<Transaction>> group = transactions.stream().collect(groupingBy(Transaction::getYear));
+        System.out.println(group.get(2011));
     }
 
 
