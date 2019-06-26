@@ -72,7 +72,9 @@ public class StreamPracticeImpl {
     @Data
     @AllArgsConstructor
     public static class Trader {
+        //姓名
         private final String name;
+        //城市
         private final String city;
     }
 
