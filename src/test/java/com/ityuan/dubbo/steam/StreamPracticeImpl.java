@@ -61,7 +61,7 @@ public class StreamPracticeImpl {
         OptionalInt sum = transactions.stream().mapToInt(Transaction::getValue).max();
         //数值范围
         IntStream.rangeClosed(0, 100).forEach(value -> value++);
-        //交易按照年度分组2
+        //交易按照年度分组21
         Map<Integer, List<Transaction>> group = transactions.stream().collect(groupingBy(Transaction::getYear));
         System.out.println(group.get(2011));
     }
