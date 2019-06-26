@@ -56,7 +56,11 @@ public class StreamPracticeImpl {
         //所有交易中，最高的交易额是多少
         Optional<Integer> t6 = transactions.stream().map(transaction -> transaction.getValue()).reduce(Integer::max);
         //找到交易额最小的交易
-        Optional<Transaction> t7 = transactions.stream().min((o1, o2) -> o1.getValue()>o2.getValue()?1:-1);
+        Optional<Transaction> t7 = transactions.stream().min((o1, o2) -> o1.getValue() > o2.getValue() ? 1 : -1);
+
+        int sum = transactions.stream().mapToInt(t -> t.getValue()).sum();
+        System.out.println(sum);
+
     }
 
 
