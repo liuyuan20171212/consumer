@@ -1,4 +1,4 @@
-package com.ityuan.dubbo.design.strategy;
+package com.ityuan.dubbo.design.strategy.strategy01;
 
 import org.springframework.stereotype.Component;
 

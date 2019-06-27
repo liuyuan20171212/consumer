@@ -1,4 +1,4 @@
-package com.ityuan.dubbo.design.strategy;
+package com.ityuan.dubbo.design.strategy.strategy01;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
