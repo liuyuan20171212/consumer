@@ -1,6 +1,8 @@
 package com.ityuan.dubbo.design;
 
 import com.ityuan.dubbo.design.builder.House;
+import com.ityuan.dubbo.design.command.command.DeviceCommand;
+import com.ityuan.dubbo.design.command.invoker.Invoker;
 import com.ityuan.dubbo.design.decorator.CookDecorator;
 import com.ityuan.dubbo.design.decorator.CookService;
 import com.ityuan.dubbo.design.decorator.MeatDecoratorImpl;
@@ -41,6 +43,21 @@ public class DesignPatternsTest {
     private CookService smallFireCookServiceImpl;
 
     /**
+     * 关闭设备命令
+     */
+    @Autowired
+    @Qualifier("closeDeviceCommandImpl")
+    private DeviceCommand closeDeviceCommandImpl;
+
+    /**
+     * 打开设备命令
+     */
+    @Autowired
+    @Qualifier("openDeviceCommandImpl")
+    private DeviceCommand openDeviceCommandImpl;
+
+
+    /**
      * 策略模式，有很多种实现还可以采取注解的方式实现
      */
     @Test
@@ -72,4 +89,18 @@ public class DesignPatternsTest {
         meatDecorator.cook();
         vegetableDecorator.cook();
     }
+
+    /**
+     * 命令模式：包含三个领域，命令模型，发送命令，接收命令
+     * 遗留问题：如何动态设置命令接收者
+     */
+    @Test
+    public void test04() {
+        Invoker invoker1 = new Invoker(openDeviceCommandImpl);
+        invoker1.call();
+        Invoker invoker2 = new Invoker(closeDeviceCommandImpl);
+        invoker2.call();
+    }
+
+
 }
