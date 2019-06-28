@@ -1,7 +1,6 @@
 package com.ityuan.dubbo.design.command.receiver;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 /**
  * 电脑
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @Date 2019-06-27 18:32
  */
 @Data
-@Component
 public class Computer extends Device {
 
     @Override

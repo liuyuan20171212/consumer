@@ -1,7 +1,6 @@
 package com.ityuan.dubbo.design.command.receiver;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
 
 /**
  * 灯
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Component;
  * @Date 2019-06-27 18:18
  */
 @Data
-@Component
 public class Light extends Device {
 
     @Override

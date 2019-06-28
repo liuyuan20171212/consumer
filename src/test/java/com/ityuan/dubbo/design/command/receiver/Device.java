@@ -1,8 +1,5 @@
 package com.ityuan.dubbo.design.command.receiver;
 
-import lombok.Data;
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 
 /**
@@ -11,9 +8,7 @@ import java.math.BigDecimal;
  * @Author ityuan
  * @Date 2019-06-27 18:24
  */
-@Data
-@Component
-public class Device {
+public abstract class Device {
     /**
      * 品牌
      */

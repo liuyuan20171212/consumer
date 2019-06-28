@@ -1,6 +1,7 @@
 package com.ityuan.dubbo.design.command.invoker;
 
-import com.ityuan.dubbo.design.command.command.DeviceCommand;
+import com.ityuan.dubbo.design.command.command.DeviceCommandService;
+import com.ityuan.dubbo.design.command.receiver.Device;
 
 /**
  * 调用命令
@@ -12,22 +13,22 @@ public class Invoker {
     /**
      * 设备命令
      */
-    private DeviceCommand command;
+    private DeviceCommandService command;
 
     /**
      * 注入命令
      *
      * @param command
      */
-    public Invoker(DeviceCommand command) {
+    public Invoker(DeviceCommandService command) {
         this.command = command;
     }
 
     /**
      * 调用命令
      */
-    public void call() {
-        command.execute();
+    public void call(Device device) {
+        command.execute(device);
     }
 
 }

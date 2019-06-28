@@ -1,8 +1,10 @@
 package com.ityuan.dubbo.design;
 
 import com.ityuan.dubbo.design.builder.House;
-import com.ityuan.dubbo.design.command.command.DeviceCommand;
+import com.ityuan.dubbo.design.command.command.DeviceCommandService;
 import com.ityuan.dubbo.design.command.invoker.Invoker;
+import com.ityuan.dubbo.design.command.receiver.Computer;
+import com.ityuan.dubbo.design.command.receiver.Light;
 import com.ityuan.dubbo.design.decorator.CookDecorator;
 import com.ityuan.dubbo.design.decorator.CookService;
 import com.ityuan.dubbo.design.decorator.MeatDecoratorImpl;
@@ -47,14 +49,14 @@ public class DesignPatternsTest {
      */
     @Autowired
     @Qualifier("closeDeviceCommandImpl")
-    private DeviceCommand closeDeviceCommandImpl;
+    private DeviceCommandService closeDeviceCommandImpl;
 
     /**
      * 打开设备命令
      */
     @Autowired
     @Qualifier("openDeviceCommandImpl")
-    private DeviceCommand openDeviceCommandImpl;
+    private DeviceCommandService openDeviceCommandImpl;
 
 
     /**
@@ -92,14 +94,13 @@ public class DesignPatternsTest {
 
     /**
      * 命令模式：包含三个领域，命令模型，发送命令，接收命令
-     * 遗留问题：如何动态设置命令接收者
      */
     @Test
     public void test04() {
         Invoker invoker1 = new Invoker(openDeviceCommandImpl);
-        invoker1.call();
+        invoker1.call(new Light());
         Invoker invoker2 = new Invoker(closeDeviceCommandImpl);
-        invoker2.call();
+        invoker2.call(new Computer());
     }
 
 

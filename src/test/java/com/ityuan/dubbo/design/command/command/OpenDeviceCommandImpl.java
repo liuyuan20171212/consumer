@@ -12,12 +12,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class OpenDeviceCommandImpl extends DeviceCommand {
 
-    public OpenDeviceCommandImpl(Device device) {
-        super(device);
+    /**
+     * 设置命令接受者
+     *
+     * @param device
+     */
+    @Override
+    public void setDevice(Device device) {
+        super.device = device;
     }
 
+    /**
+     * 处理命令
+     */
     @Override
-    public void execute() {
-        this.device.open();
+    public void process() {
+        super.device.open();
     }
 }

@@ -12,12 +12,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class CloseDeviceCommandImpl extends DeviceCommand {
 
-    public CloseDeviceCommandImpl(Device device) {
-        super(device);
+
+    @Override
+    public void setDevice(Device device) {
+        super.device = device;
     }
 
     @Override
-    public void execute() {
-        this.device.close();
+    public void process() {
+        super.device.close();
     }
 }
