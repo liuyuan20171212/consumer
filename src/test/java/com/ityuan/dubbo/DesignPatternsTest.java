@@ -1,4 +1,4 @@
-package com.ityuan.dubbo.design;
+package com.ityuan.dubbo;
 
 import com.ityuan.dubbo.design.builder.House;
 import com.ityuan.dubbo.design.chain.AbstractInterviewer;
@@ -15,6 +15,8 @@ import com.ityuan.dubbo.design.observer.Fan;
 import com.ityuan.dubbo.design.observer.FemaleFan;
 import com.ityuan.dubbo.design.observer.MaleFan;
 import com.ityuan.dubbo.design.observer.WeChatPublic;
+import com.ityuan.dubbo.design.status.VoteEnum;
+import com.ityuan.dubbo.design.status.VoteManager;
 import com.ityuan.dubbo.design.strategy.strategy01.AbstractTaskProcessor;
 import com.ityuan.dubbo.design.strategy.strategy01.TaskContextInitialization;
 import org.junit.Test;
@@ -23,9 +25,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * 设计模式测试类
@@ -85,9 +84,16 @@ public class DesignPatternsTest {
     @Autowired
     @Qualifier("hrInterviewer")
     private AbstractInterviewer hrInterviewer;
-
+    /**
+     * 观察者模式
+     */
     @Autowired
     private WeChatPublic weChatPublic;
+    /**
+     * 状态设计模式之投票
+     */
+    @Autowired
+    private VoteManager voteManager;
 
     /**
      * 策略模式，有很多种实现还可以采取注解的方式实现
@@ -145,30 +151,8 @@ public class DesignPatternsTest {
         managerInterviewer.setNextInterviewer(hrInterviewer);
         //开始面试
         teamInterviewer.process(interviewee);
+        System.out.println("刘袁".concat(teamInterviewer.toString()));
     }
-
-    @Test
-    public void test0501() {
-        //设置面试人员
-        Interviewee interviewee = new Interviewee("王韦", true);
-        //设置面试链路,组长—>经理—>人事
-        teamInterviewer.setNextInterviewer(managerInterviewer);
-//        managerInterviewer.setNextInterviewer(hrInterviewer);
-        //开始面试
-        teamInterviewer.process(interviewee);
-    }
-    @Test
-    public void test07() throws InterruptedException {
-        ExecutorService executorService = Executors.newFixedThreadPool(100);
-        for (int i = 0; i <100; i++) {
-            executorService.execute(() -> {
-                test05();
-                test0501();
-            });
-        }
-        Thread.sleep(1000);
-    }
-
 
     /**
      * 观察者模式：定义对象间一种一对多的依赖关系，使得每当一个对象改变状态，则所有依赖于它的对象都会得到通知并被自动更新
@@ -183,6 +167,16 @@ public class DesignPatternsTest {
         weChatPublic.addFan(f2);
         //发送公众号推文
         weChatPublic.sendTweets();
+    }
+
+    /**
+     * 状态设计模式：状态模式允许对象在内部状态改变时改变它的行为，对象看起来好像改变了它的类
+     * 关键点：对象内部改变其状态，可动态改变其行为。
+     *
+     */
+    @Test
+    public void test07() {
+        voteManager.startVote("刘袁", VoteEnum.BLACKLIST);
     }
 
 }
