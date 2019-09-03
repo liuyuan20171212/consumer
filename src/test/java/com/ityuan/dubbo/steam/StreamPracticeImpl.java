@@ -41,6 +41,7 @@ public class StreamPracticeImpl {
                 .sorted((o1, o2) -> o1.getValue() > o2.getValue() ? 1 : -1).collect(toList());
         //交易员都在哪些不同的城市工作过
         List<String> t2 = transactions.stream().map(transaction -> transaction.trader.getCity()).distinct().collect(toList());
+
         //查找所有来自于剑桥的交易员，并按姓名排序
         List<Trader> t3 = transactions.stream().map(transaction -> transaction.getTrader())
                 .filter(trader -> StringUtils.equals("Cambridge", trader.getCity())).sorted(comparing(Trader::getName)).collect(toList());

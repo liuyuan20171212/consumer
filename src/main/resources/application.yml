@@ -1,6 +1,3 @@
-server:
-  port: 8081
-
 ## dubbo配置
 #dubbo:
 #  application:
@@ -11,4 +8,43 @@ server:
 #  protocol:
 #    name: dubbo
 #    port: 20880
-
+spring:
+  application:
+    name: consumer
+  # 加载不同环境配置文件
+  profiles:
+    active: dev
+  #rabbitmq 配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+  #redis 配置
+  redis:
+    #Redis数据库索引（默认为0）
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    # 连接池最大连接数（使用负值表示没有限制）
+    max-active: 200
+    # 连接池最大阻塞等待时间（使用负值表示没有限制）
+    max-wait: 1
+    # 连接池中的最大空闲连接
+    max-idle: 10
+    # 连接池中的最小空闲连接
+    min-idle: 0
+    # 连接超时时间（毫秒）
+    timeout: 1000
+random:
+  #随机字符串
+  string: ${random.value}
+  #随机int
+  int: ${random.int}
+  #随机long
+  long: ${random.long}
+  #1-20的随机数
+  range: ${random.int(1,20)}
+  #UUID
+  uuid: ${random.uuid}

@@ -7,9 +7,11 @@ package com.ityuan.dubbo.web;
 import com.ityuan.dubbo.client.ConsumerClient;
 import com.ityuan.dubbo.design.chain.AbstractInterviewer;
 import com.ityuan.dubbo.design.chain.Interviewee;
+import com.ityuan.dubbo.rabbitmq.message.TestObjectMessage;
+import com.ityuan.dubbo.rabbitmq.producer.TestProducer;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,8 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @version $Id: TestWebController, v 0.1 2019-02-27 19:39 ityuan Exp $
  */
 @Controller
-@Scope("prototype")
-public class TestWebController {
+public class TestWebController implements InitializingBean {
+
     @Autowired
     private ConsumerClient consumerClient;
 
@@ -44,10 +46,18 @@ public class TestWebController {
     @Qualifier("hrInterviewer")
     private AbstractInterviewer hrInterviewer;
 
+    @Autowired
+    private TestProducer testProducer;
+
     @RequestMapping("/aa")
     @ResponseBody
-    public String aa(String name) {
-        return name;
+    public String aa(String a) {
+        TestObjectMessage message = TestObjectMessage.builder()
+                .name(a)
+                .age(11)
+                .build();
+        testProducer.sendMsg(message);
+        return "进来啦！";
     }
 
     @RequestMapping("/bb")
@@ -76,5 +86,15 @@ public class TestWebController {
         teamInterviewer.process(interviewee);
         System.out.println("王韦".concat(teamInterviewer.toString()));
         return "cc";
+    }
+
+    /**
+     * 启动就初始化调用的方法
+     *
+     * @throws Exception
+     */
+    @Override
+    public void afterPropertiesSet() throws Exception {
+
     }
 }

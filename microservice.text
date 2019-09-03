@@ -1,0 +1,2 @@
+#命令启动springBoot项目,并指定端口
+java -jar xxx.jar --server.port=8080
