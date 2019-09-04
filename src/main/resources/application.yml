@@ -37,6 +37,13 @@ spring:
     min-idle: 0
     # 连接超时时间（毫秒）
     timeout: 1000
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:ehcache.xml
+
+
+
 random:
   #随机字符串
   string: ${random.value}

@@ -59,6 +59,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 } catch (JWTDecodeException j) {
                     throw new RuntimeException("访问异常！");
                 }
+                //这里可以把登陆用户信息放到缓存中，建议采用 membercache 避免每次访问接口都去撸DB
                 User user = userService.findUserById(userId);
                 if (user == null) {
                     throw new RuntimeException("用户不存在，请重新登录");
