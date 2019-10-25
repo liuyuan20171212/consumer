@@ -1,0 +1,13 @@
+1.java中hashCode的理解
+以java.lang.Object来理解，JVM每new一个Object,他都会将这个Object丢到一个Hash表中去，这样的话，
+下次做Object的比较或者取这个对象的时候，他会依据对象的hashcode再从Hash表中取这个对象。
+这样做的目的是提高取对象的效率，详细过程如下：
+    （1）new Object(),JVM依据这个对象的Hashcode值，放到相应的Hash表对应的Key上，
+    假设不同的对象确产生了同样的hash值，也就是发生了Hash key同样导致冲突的情况，那么就在这个Hash
+    key的地方产生一个链表，将全部产生同样hashcode的对象放到这个单链表上去，串在一起
+    （2）比较两个对象的时候，首先依据他们的 hashcode 去hash表中找他的对象，当两个对象的hashcode同样，
+    那么就是说他们这两个对象放在Hash表中的同一个key上，那么他们一定在这个key上的链表上，那么此时就仅仅能
+    依据Object的equal方法来比较这个对象是否相等，当两个对象的HashCode不同的话，肯定他们不能equal
+
+2.改写equals时总是要改写hashCode
+    https://www.cnblogs.com/zhchoutai/p/8676351.html

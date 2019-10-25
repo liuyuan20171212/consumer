@@ -2,9 +2,10 @@ package com.ityuan.dubbo;
 
 import com.ityuan.dubbo.client.ConsumerClient;
 import com.ityuan.dubbo.config.RandomConfig;
+import com.ityuan.dubbo.jwt.pojo.User;
 import com.ityuan.dubbo.rabbitmq.message.TestObjectMessage;
 import com.ityuan.dubbo.rabbitmq.producer.TestProducer;
-import com.ityuan.dubbo.utils.RedisUtil;
+import com.ityuan.dubbo.redis.RedisUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,4 +64,13 @@ public class ConsumerApplicationTests {
         System.out.println("随机字符串::".concat(randomConfig.getRandomString()));
         System.out.println("uuid:".concat(randomConfig.getRandomUuId()));
     }
+
+    public static void main(String[] args) {
+        User user = new User("1", "liuyuan", "330829831");
+        int a = user.hashCode();
+        //270242798
+        System.out.println(a - a / 3 * 3);
+
+    }
+
 }

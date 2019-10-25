@@ -2,8 +2,10 @@ package com.ityuan.dubbo.service.impl;
 
 import com.ityuan.dubbo.jwt.pojo.User;
 import com.ityuan.dubbo.service.UserService;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @Author ityuan
@@ -21,9 +23,18 @@ public class UserServiceImpl implements UserService {
      * Spring在缓存方法的返回值时是以键值对进行缓存的，值就是方法的返回结果
      */
     @Override
-    @Cacheable(value = "cloud_user")
+//    @Cacheable(value = "cloud_user")
     public User findUserById(String id) {
         return new User("1", "liuyuan", "330829831");
+    }
+
+    @Override
+    public List<User> findAllUsers() {
+        User a = new User("1", "liuyuan", "330829831");
+        User b = new User("2", "liuyuan", "330829831");
+        User c = new User("3", "liuyuan", "330829831");
+        System.out.println("-------------findAllUsers,数据库层面------------");
+        return Arrays.asList(a, b, c);
     }
 
 }

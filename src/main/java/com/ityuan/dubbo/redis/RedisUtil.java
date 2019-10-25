@@ -1,4 +1,4 @@
-package com.ityuan.dubbo.utils;
+package com.ityuan.dubbo.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

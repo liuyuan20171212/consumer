@@ -17,6 +17,7 @@ public class Test1Consumer {
 
     @RabbitHandler
     public void process(TestObjectMessage message) {
+
         System.out.println("QUEUE_A 接收处理队列A当中的消息： " + message);
     }
 
